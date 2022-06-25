@@ -15,8 +15,8 @@ describe('GuessTheNumberChallenge', async function () {
   })
 
   it('Attack', async function () {
-    const a = 0 // input a number
-    const b = 0 // input a number
+    const a = 0
+    const b = ethers.constants.MaxUint256.sub(1000).add(1)
     await challenge.input(a, b)
     expect(await challenge.isSolved()).to.be.true
   })
